@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  next-app:
+    image: rodarte/nextjs-fr-pokemon-static-app-dev:latest
+    environment:
+      NEXT_PUBLIC_STAGE: development-docker
+      PORT: 3000
+      HOST: 0.0.0.0
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./pokemon-static-app/node/app
+      - /node/app/node_modules

@@ -1,0 +1,5 @@
+version: '3.4'
+
+services:
+  next-app:
+    image: rodarte/nextjs-fr-pokemon-static-app-prod:latest
