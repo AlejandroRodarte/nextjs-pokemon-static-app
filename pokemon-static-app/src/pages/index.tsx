@@ -1,9 +1,9 @@
-import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import { CustomNextPage } from '../types/next/custom-next-page.type'
 
-const Home: NextPage = () => {
+const Home: CustomNextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
