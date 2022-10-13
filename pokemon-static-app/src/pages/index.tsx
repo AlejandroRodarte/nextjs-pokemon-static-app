@@ -1,4 +1,5 @@
 import { Button } from '@nextui-org/react';
+import { DefaultLayout } from '../components/layouts';
 
 import { CustomNextPage } from '../types/next/custom-next-page.type';
 
@@ -11,5 +12,9 @@ const HomePage: CustomNextPage<HomePageProps> = () => {
     </>
   );
 };
+
+HomePage.getLayout = (page) => (
+  <DefaultLayout title="Listado de Pokemons">{page}</DefaultLayout>
+);
 
 export default HomePage;
