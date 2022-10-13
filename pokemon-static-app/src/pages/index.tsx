@@ -1,7 +1,8 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
-import { CustomNextPage } from '../types/next/custom-next-page.type'
+import Head from 'next/head';
+import Image from 'next/image';
+import { env } from '../config/env';
+import styles from '../styles/Home.module.css';
+import { CustomNextPage } from '../types/next/custom-next-page.type';
 
 const Home: CustomNextPage = () => {
   return (
@@ -16,6 +17,8 @@ const Home: CustomNextPage = () => {
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
+
+        <h2>Stage: {env.public.stage}</h2>
 
         <p className={styles.description}>
           Get started by editing{' '}
@@ -66,7 +69,7 @@ const Home: CustomNextPage = () => {
         </a>
       </footer>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

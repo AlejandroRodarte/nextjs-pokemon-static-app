@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   next-app:
-    image: rodarte/nextjs-fr-pokemon-static-app-prod:latest
+    image: rodarte/nextjs-fr-pokemon-static-app-prod:b66b4f6
     environment:
       NEXT_PUBLIC_STAGE: production-docker
       PORT: 3000
