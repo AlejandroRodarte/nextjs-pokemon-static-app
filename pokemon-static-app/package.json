@@ -1,7 +1,8 @@
 {
-  "name": "pokemon-static-app",
-  "version": "0.1.0",
+  "name": "nextjs-fr-pokemon-static-app",
+  "version": "0.0.1",
   "private": true,
+  "description": "Pokemon Static Application built with Next.js as part of a Udemy course made by Fernando Herrera",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
