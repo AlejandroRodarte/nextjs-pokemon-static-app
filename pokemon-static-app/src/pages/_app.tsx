@@ -1,5 +1,7 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
+import { NextUIProvider } from '@nextui-org/react';
+
 import { CustomNextPage } from '../types/next/custom-next-page.type';
 
 type ExtraAppProps = {
@@ -9,8 +11,11 @@ type ExtraAppProps = {
 type CustomAppProps = AppProps & ExtraAppProps;
 
 function MyApp({ Component, pageProps }: CustomAppProps) {
-  const getLayout = Component.getLayout || ((page) => page);
-  return getLayout(<Component {...pageProps} />);
+  return (
+    <NextUIProvider>
+      <Component {...pageProps} />
+    </NextUIProvider>
+  );
 }
 
 export default MyApp;

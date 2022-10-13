@@ -1,3 +1,5 @@
+import { Button } from '@nextui-org/react';
+
 import { CustomNextPage } from '../types/next/custom-next-page.type';
 
 interface HomePageProps {}
@@ -5,7 +7,7 @@ interface HomePageProps {}
 const HomePage: CustomNextPage<HomePageProps> = () => {
   return (
     <>
-      <h1>Hola Mundo</h1>
+      <Button color="gradient">Hola Mundo</Button>
     </>
   );
 };
