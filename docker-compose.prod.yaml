@@ -4,9 +4,12 @@ services:
   next-app:
     image: rodarte/nextjs-fr-pokemon-static-app-prod:b66b4f6
     environment:
-      NEXT_PUBLIC_STAGE: production-docker
       ALLOWED_IMAGE_DOMAINS: raw.githubusercontent.com
-      PORT: 3000
       HOST: 0.0.0.0
+      NEXT_PUBLIC_POKEAPI_URL: https://pokeapi.co/api/v2
+      NEXT_PUBLIC_STAGE: production-docker
+      POKEAPI_URL: https://pokeapi.co/api/v2
+      POKEMON_LIMIT: 151
+      PORT: 3000
     ports:
       - '3000:3000'

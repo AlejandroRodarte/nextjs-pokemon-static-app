@@ -76,6 +76,7 @@ LABEL org.opencontainers.image.title "Build image for a Pokemon Static website b
 LABEL com.rodarte.nextjs.fr.pokemon-static-app.stage build
 
 RUN NEXT_PUBLIC_STAGE=APP_NEXT_PUBLIC_STAGE_VAR \
+    NEXT_PUBLIC_POKEAPI_URL=APP_NEXT_PUBLIC_POKEAPI_URL_VAR \
     next build
 
 

@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next';
 import { DefaultLayout } from '../components/layouts';
+import { env } from '../config/env.config';
 
 import { CustomNextPage } from '../types/next/custom-next-page.type';
 
@@ -27,6 +28,7 @@ HomePage.getLayout = (page) => (
 export const getStaticProps: GetStaticProps<HomePageProps> = async (
   context
 ) => {
+  console.log(env);
   return { props: {} };
 };
 

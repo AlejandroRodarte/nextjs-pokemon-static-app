@@ -78,6 +78,15 @@ jobs:
         with:
           path: ./pokemon-static-app
 
+      - name: Create .env.production.local file (for static generation)
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_ALLOWED_IMAGE_DOMAINS: raw.githubusercontent.com
+          envkey_POKEAPI_URL: https://pokeapi.co/api/v2
+          envkey_POKEMON_LIMIT: 151
+          directory: ./pokemon-static-app
+          file_name: .env.production.local
+
       - name: Login to DockerHub
         uses: docker/login-action@v2
         with:
