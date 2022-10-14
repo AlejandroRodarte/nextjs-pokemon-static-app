@@ -5,6 +5,7 @@ services:
     image: rodarte/nextjs-fr-pokemon-static-app-dev:abbea69
     environment:
       NEXT_PUBLIC_STAGE: development-docker
+      ALLOWED_IMAGE_DOMAINS: raw.githubusercontent.com
       PORT: 3000
       HOST: 0.0.0.0
     ports:

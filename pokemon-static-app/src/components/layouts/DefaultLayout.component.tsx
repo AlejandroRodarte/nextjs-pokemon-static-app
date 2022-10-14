@@ -1,6 +1,9 @@
 import React, { ReactNode } from 'react';
 import Head from 'next/head';
 
+import classes from './DefaultLayout.module.css';
+import { MainNavbar } from '../ui/navbar/MainNavbar.component';
+
 interface DefaultLayoutProps {
   children: ReactNode;
   title?: string;
@@ -18,9 +21,9 @@ export const DefaultLayout: React.FC<DefaultLayoutProps> = (props) => {
         <meta name="keywords" content="X, pokemon, pokedex" />
       </Head>
 
-      {/* Navbar */}
+      <MainNavbar />
 
-      <main>{children}</main>
+      <main className={classes.main}>{children}</main>
     </>
   );
 };
