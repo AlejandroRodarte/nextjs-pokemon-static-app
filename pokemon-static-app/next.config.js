@@ -13,6 +13,7 @@ const nextConfig = {
     allowedImageDomains,
     pokeApiUrl: process.env.POKEAPI_URL || '',
     pokemonLimit: +(process.env.POKEMON_LIMIT || '151'),
+    stage: process.env.STAGE || 'development-local',
   },
   output: 'standalone',
   images: {

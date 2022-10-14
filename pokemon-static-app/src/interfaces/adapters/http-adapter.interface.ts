@@ -6,7 +6,7 @@ type GetOptions<QueryParams> = {
 };
 
 export interface HttpAdapter {
-  get<QueryParams, Response>(
+  get<QueryParams extends { [key: string]: string }, Response>(
     options: GetOptions<QueryParams>
   ): Promise<DataErrorTuple<Response, Error>>;
 }

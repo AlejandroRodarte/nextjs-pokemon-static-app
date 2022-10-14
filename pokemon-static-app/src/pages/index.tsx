@@ -32,7 +32,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async (
   context
 ) => {
   const [pokemons, error] = await pokemonService.getPokemons(
-    env.server.pokemon.limit
+    env.server.isDev ? 10 : env.server.pokemon.limit
   );
   if (error || !pokemons) return { props: { pokemons: [] } };
   return { props: { pokemons } };

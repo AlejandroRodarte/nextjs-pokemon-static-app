@@ -4,7 +4,7 @@ import { DataErrorTuple } from '../../types/common/data-error-tuple.type';
 import { pokemonAxiosAdapter } from '../../adapters/http/axios.adapter';
 
 type GetPokemonsQueryParams = {
-  limit: number;
+  limit: string;
 };
 
 export class PokemonService {
@@ -20,7 +20,7 @@ export class PokemonService {
     const [response, error] = await this.http.get<
       GetPokemonsQueryParams,
       GetPokemonsResponse
-    >({ url: 'pokemon', queryParams: { limit } });
+    >({ url: 'pokemon', queryParams: { limit: limit.toString() } });
     return [response?.results, error];
   }
 }
