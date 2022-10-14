@@ -1,22 +1,25 @@
 import { GetStaticProps } from 'next';
+
 import { DefaultLayout } from '../components/layouts';
 import { env } from '../config/env.config';
-
+import { pokemonService } from '../services/server/pokemon.service';
 import { CustomNextPage } from '../types/next/custom-next-page.type';
+import { GetPokemonsResponse } from '../interfaces/pokemon/get-pokemons-response.interface';
 
-interface HomePageProps {}
+interface HomePageProps {
+  pokemons: GetPokemonsResponse['results'];
+}
 
-const HomePage: CustomNextPage<HomePageProps> = () => {
+const HomePage: CustomNextPage<HomePageProps> = (props) => {
+  const { pokemons } = props;
+
   return (
     <ul>
-      <li>Pokemon</li>
-      <li>Pokemon</li>
-      <li>Pokemon</li>
-      <li>Pokemon</li>
-      <li>Pokemon</li>
-      <li>Pokemon</li>
-      <li>Pokemon</li>
-      <li>Pokemon</li>
+      {pokemons.map((pokemon) => (
+        <li key={pokemon.name}>
+          {pokemon.name} - {pokemon.url}
+        </li>
+      ))}
     </ul>
   );
 };
@@ -28,8 +31,11 @@ HomePage.getLayout = (page) => (
 export const getStaticProps: GetStaticProps<HomePageProps> = async (
   context
 ) => {
-  console.log(env);
-  return { props: {} };
+  const [pokemons, error] = await pokemonService.getPokemons(
+    env.server.pokemon.limit
+  );
+  if (error || !pokemons) return { props: { pokemons: [] } };
+  return { props: { pokemons } };
 };
 
 export default HomePage;
