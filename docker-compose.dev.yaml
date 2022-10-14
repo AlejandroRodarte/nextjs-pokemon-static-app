@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   next-app:
-    image: rodarte/nextjs-fr-pokemon-static-app-dev:abbea69
+    image: rodarte/nextjs-fr-pokemon-static-app-dev:4c41ab5
     environment:
       ALLOWED_IMAGE_DOMAINS: raw.githubusercontent.com
       HOST: 0.0.0.0
