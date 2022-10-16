@@ -84,6 +84,7 @@ jobs:
           envkey_ALLOWED_IMAGE_DOMAINS: raw.githubusercontent.com
           envkey_POKEAPI_URL: https://pokeapi.co/api/v2
           envkey_POKEMON_LIMIT: 151
+          envkey_POKEMON_SPRITES_URL: https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon
           envkey_STAGE: production-docker
           directory: ./pokemon-static-app
           file_name: .env.production.local

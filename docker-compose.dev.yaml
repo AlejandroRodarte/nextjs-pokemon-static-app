@@ -7,9 +7,11 @@ services:
       ALLOWED_IMAGE_DOMAINS: raw.githubusercontent.com
       HOST: 0.0.0.0
       NEXT_PUBLIC_POKEAPI_URL: https://pokeapi.co/api/v2
+      NEXT_PUBLIC_POKEMON_SPRITES_URL: https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon
       NEXT_PUBLIC_STAGE: development-docker
       POKEAPI_URL: https://pokeapi.co/api/v2
       POKEMON_LIMIT: 151
+      POKEMON_SPRITES_URL: https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon
       PORT: 3000
       STAGE: development-docker
     ports:
