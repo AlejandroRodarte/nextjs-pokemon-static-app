@@ -43,9 +43,8 @@ HomePage.getLayout = (page) => (
 export const getStaticProps: GetStaticProps<HomePageProps> = async (
   context
 ) => {
-  const [smallPokemons, error] = await pokemonService.getPokemons(
-    env.server.isDev ? 10 : env.server.pokemon.limit
-  );
+  const limit = env.server.isDev ? 10 : env.server.pokemon.limit;
+  const [smallPokemons, error] = await pokemonService.getPokemons(limit);
   if (error || !smallPokemons) return { props: { pokemons: [] } };
 
   const pokemons: PokemonCardData[] = smallPokemons.map((sp) => {
