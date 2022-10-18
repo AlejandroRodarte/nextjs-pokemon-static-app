@@ -3,6 +3,8 @@ import Image from 'next/image';
 import { Spacer, Text, useTheme } from '@nextui-org/react';
 
 import classes from './MainNavbar.module.css';
+import Link from 'next/link';
+import { env } from '../../../config/env.config';
 
 interface MainNavbarProps {}
 
@@ -16,24 +18,31 @@ export const MainNavbar: React.FC<MainNavbarProps> = () => {
     [theme?.colors.gray100.value]
   );
 
+  const logoImg = env.server.pokemon.spritesUrl
+    ? `${env.server.pokemon.spritesUrl}/versions/generation-iv/platinum/132.png`
+    : `${env.public.pokemon.spritesUrl}/versions/generation-iv/platinum/132.png`;
+
   return (
     <div style={containerStyles} className={classes.container}>
-      <Image
-        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-iv/platinum/132.png"
-        alt="pokemon-icon"
-        width={70}
-        height={70}
-      />
-      <Text color="white" h2>
-        P
-      </Text>
-      <Text color="white" h3>
-        okémon
-      </Text>
+      <Image src={logoImg} alt="pokemon-icon" width={70} height={70} />
+      <Link href="/">
+        <a style={{ display: 'flex' }}>
+          <Text color="white" h2>
+            P
+          </Text>
+          <Text color="white" h3>
+            okémon
+          </Text>
+        </a>
+      </Link>
       <Spacer css={{ flex: 1 }} />
-      <Text color="white" h3>
-        Favoritos
-      </Text>
+      <Link href="/favorites">
+        <a style={{ display: 'flex' }}>
+          <Text color="white" h3>
+            Favoritos
+          </Text>
+        </a>
+      </Link>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Card, Grid, Row, Text } from '@nextui-org/react';
+import { Card, Row, Text } from '@nextui-org/react';
 
 import { PokemonCardData } from '../../interfaces/props/pokemon-card-data.interface';
 
@@ -16,7 +16,7 @@ export const PokemonCard: React.FC<PokemonCardProps> = (props) => {
 
   const onCardClick = useCallback<OnCardClickHandler>(() => {
     onPokemonCardClick(pokemonId);
-  }, [onPokemonCardClick]);
+  }, [onPokemonCardClick, pokemonId]);
 
   return (
     <Card isHoverable isPressable onClick={onCardClick}>
