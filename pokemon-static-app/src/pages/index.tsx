@@ -1,5 +1,5 @@
 import { GetStaticProps } from 'next';
-import Image from 'next/image';
+import { Card, Grid, Row, Text } from '@nextui-org/react';
 
 import { DefaultLayout } from '../components/layouts';
 import { env } from '../config/env.config';
@@ -21,14 +21,23 @@ const HomePage: CustomNextPage<HomePageProps> = (props) => {
   const { pokemons } = props;
 
   return (
-    <ul>
+    <Grid.Container gap={2} justify="flex-start">
       {pokemons.map((pokemon) => (
-        <li key={pokemon.name}>
-          {pokemon.name} - {pokemon.id}
-          <Image src={pokemon.img} width={70} height={70} />
-        </li>
+        <Grid key={pokemon.name} xs={6} sm={3} lg={2} xl={1}>
+          <Card isHoverable isPressable>
+            <Card.Body css={{ p: 1 }}>
+              <Card.Image src={pokemon.img} width="100%" height={140} />
+            </Card.Body>
+            <Card.Footer>
+              <Row justify="space-between">
+                <Text transform="capitalize">{pokemon.name}</Text>
+                <Text>#{pokemon.id}</Text>
+              </Row>
+            </Card.Footer>
+          </Card>
+        </Grid>
       ))}
-    </ul>
+    </Grid.Container>
   );
 };
 
