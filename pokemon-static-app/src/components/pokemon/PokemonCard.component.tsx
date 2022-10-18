@@ -19,18 +19,16 @@ export const PokemonCard: React.FC<PokemonCardProps> = (props) => {
   }, [onPokemonCardClick]);
 
   return (
-    <Grid key={pokemon.name} xs={6} sm={3} lg={2} xl={1}>
-      <Card isHoverable isPressable onClick={onCardClick}>
-        <Card.Body css={{ p: 1 }}>
-          <Card.Image src={pokemon.img} width="100%" height={140} />
-        </Card.Body>
-        <Card.Footer>
-          <Row justify="space-between">
-            <Text transform="capitalize">{pokemon.name}</Text>
-            <Text>#{pokemon.id}</Text>
-          </Row>
-        </Card.Footer>
-      </Card>
-    </Grid>
+    <Card isHoverable isPressable onClick={onCardClick}>
+      <Card.Body css={{ p: 1 }}>
+        <Card.Image src={pokemon.img} width="100%" height={140} />
+      </Card.Body>
+      <Card.Footer>
+        <Row justify="space-between">
+          <Text transform="capitalize">{pokemon.name}</Text>
+          <Text>#{pokemon.id}</Text>
+        </Row>
+      </Card.Footer>
+    </Card>
   );
 };

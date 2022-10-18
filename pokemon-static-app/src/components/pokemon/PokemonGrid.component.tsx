@@ -24,11 +24,13 @@ export const PokemonGrid: React.FC<PokemonGridProps> = (props) => {
   return (
     <Grid.Container gap={2} justify="flex-start">
       {pokemons.map((pokemon) => (
-        <PokemonCard
-          key={pokemon.id}
-          pokemon={pokemon}
-          onPokemonCardClick={pokemonCardOnPokemonCardClick}
-        />
+        <Grid key={pokemon.name} xs={6} sm={3} lg={2} xl={1}>
+          <PokemonCard
+            key={pokemon.id}
+            pokemon={pokemon}
+            onPokemonCardClick={pokemonCardOnPokemonCardClick}
+          />
+        </Grid>
       ))}
     </Grid.Container>
   );
