@@ -5,11 +5,13 @@ interface Config {
     stage: string;
     pokeApiUrl: string;
     pokemonSpritesUrl: string;
+    pokemonSpriteLogoRelativePath: string;
   };
   serverRuntimeConfig: {
     allowedImageDomains: string[];
     pokeApiUrl: string;
     pokemonLimit: number;
+    pokemonSpriteLogoRelativePath: string;
     pokemonSpritesUrl: string;
     stage: string;
   };
@@ -21,6 +23,7 @@ interface Env {
     isDev: boolean;
     pokemon: {
       api: string;
+      logoPath: string;
       spritesUrl: string;
     };
   };
@@ -33,6 +36,7 @@ interface Env {
     pokemon: {
       api: string;
       limit: number;
+      logoPath: string;
       spritesUrl: string;
     };
   };
@@ -48,6 +52,7 @@ export const env: Env = {
     ),
     pokemon: {
       api: publicRuntimeConfig.pokeApiUrl,
+      logoPath: publicRuntimeConfig.pokemonSpriteLogoRelativePath,
       spritesUrl: publicRuntimeConfig.pokemonSpritesUrl,
     },
   },
@@ -62,6 +67,7 @@ export const env: Env = {
     pokemon: {
       api: serverRuntimeConfig.pokeApiUrl,
       limit: serverRuntimeConfig.pokemonLimit,
+      logoPath: serverRuntimeConfig.pokemonSpriteLogoRelativePath,
       spritesUrl: serverRuntimeConfig.pokemonSpritesUrl,
     },
   },

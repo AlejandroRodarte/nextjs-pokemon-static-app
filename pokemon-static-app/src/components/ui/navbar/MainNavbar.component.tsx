@@ -1,10 +1,11 @@
 import React, { CSSProperties, useMemo } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Spacer, Text, useTheme } from '@nextui-org/react';
 
 import classes from './MainNavbar.module.css';
-import Link from 'next/link';
 import { env } from '../../../config/env.config';
+import { IS_SERVER } from '../../../constants/common.constants';
 
 interface MainNavbarProps {}
 
@@ -18,9 +19,9 @@ export const MainNavbar: React.FC<MainNavbarProps> = () => {
     [theme?.colors.gray100.value]
   );
 
-  const logoImg = env.server.pokemon.spritesUrl
-    ? `${env.server.pokemon.spritesUrl}/versions/generation-iv/platinum/132.png`
-    : `${env.public.pokemon.spritesUrl}/versions/generation-iv/platinum/132.png`;
+  const logoImg = IS_SERVER
+    ? `${env.server.pokemon.spritesUrl}/${env.server.pokemon.logoPath}`
+    : `${env.public.pokemon.spritesUrl}/${env.public.pokemon.logoPath}`;
 
   return (
     <div style={containerStyles} className={classes.container}>
