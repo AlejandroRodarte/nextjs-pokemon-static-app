@@ -1,2 +1,2 @@
-export { PokemonCard } from './PokemonCard.component';
-export { PokemonGrid } from './PokemonGrid.component';
+export { PokemonCard, type PokemonCardProps } from './PokemonCard.component';
+export { PokemonGrid, type PokemonGridProps } from './PokemonGrid.component';

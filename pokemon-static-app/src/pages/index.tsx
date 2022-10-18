@@ -1,12 +1,13 @@
+import { useCallback } from 'react';
 import { GetStaticProps } from 'next';
-import { Card, Grid, Row, Text } from '@nextui-org/react';
+import { useRouter } from 'next/router';
 
 import { DefaultLayout } from '../components/layouts';
 import { env } from '../config/env.config';
 import { pokemonService } from '../services/server/pokemon.service';
 import { CustomNextPage } from '../types/next/custom-next-page.type';
 import { PokemonCardData } from '../interfaces/props/pokemon-card-data.interface';
-import { PokemonGrid } from '../components/pokemon';
+import { PokemonGrid, PokemonGridProps } from '../components/pokemon';
 
 interface HomePageProps {
   pokemons: PokemonCardData[];
@@ -14,7 +15,25 @@ interface HomePageProps {
 
 const HomePage: CustomNextPage<HomePageProps> = (props) => {
   const { pokemons } = props;
-  return <PokemonGrid pokemons={pokemons} />;
+
+  const router = useRouter();
+  const { push } = router;
+
+  const pokemonGridOnPokemonCardClick = useCallback<
+    PokemonGridProps['onPokemonCardClick']
+  >(
+    (pokemonId) => {
+      push(`/pokemon/${pokemonId}`);
+    },
+    [push]
+  );
+
+  return (
+    <PokemonGrid
+      pokemons={pokemons}
+      onPokemonCardClick={pokemonGridOnPokemonCardClick}
+    />
+  );
 };
 
 HomePage.getLayout = (page) => (
