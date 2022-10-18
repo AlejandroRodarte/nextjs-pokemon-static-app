@@ -5,16 +5,11 @@ import { DefaultLayout } from '../components/layouts';
 import { env } from '../config/env.config';
 import { pokemonService } from '../services/server/pokemon.service';
 import { CustomNextPage } from '../types/next/custom-next-page.type';
-
-interface Pokemon {
-  id: number;
-  img: string;
-  name: string;
-  url: string;
-}
+import { PokemonCardData } from '../interfaces/props/pokemon-card-data.interface';
+import { PokemonCard } from '../components/pokemon';
 
 interface HomePageProps {
-  pokemons: Pokemon[];
+  pokemons: PokemonCardData[];
 }
 
 const HomePage: CustomNextPage<HomePageProps> = (props) => {
@@ -23,19 +18,7 @@ const HomePage: CustomNextPage<HomePageProps> = (props) => {
   return (
     <Grid.Container gap={2} justify="flex-start">
       {pokemons.map((pokemon) => (
-        <Grid key={pokemon.name} xs={6} sm={3} lg={2} xl={1}>
-          <Card isHoverable isPressable>
-            <Card.Body css={{ p: 1 }}>
-              <Card.Image src={pokemon.img} width="100%" height={140} />
-            </Card.Body>
-            <Card.Footer>
-              <Row justify="space-between">
-                <Text transform="capitalize">{pokemon.name}</Text>
-                <Text>#{pokemon.id}</Text>
-              </Row>
-            </Card.Footer>
-          </Card>
-        </Grid>
+        <PokemonCard key={pokemon.id} pokemon={pokemon} />
       ))}
     </Grid.Container>
   );
@@ -53,7 +36,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async (
   );
   if (error || !smallPokemons) return { props: { pokemons: [] } };
 
-  const pokemons: Pokemon[] = smallPokemons.map((sp) => {
+  const pokemons: PokemonCardData[] = smallPokemons.map((sp) => {
     const name = sp.name;
     const url = sp.url;
     const urlSplit = url.split('/');
