@@ -19,7 +19,7 @@ export const PokemonCard: React.FC<PokemonCardProps> = (props) => {
   }, [onPokemonCardClick, pokemonId]);
 
   return (
-    <Card isHoverable isPressable onClick={onCardClick}>
+    <Card isHoverable isPressable onPress={onCardClick}>
       <Card.Body css={{ p: 1 }}>
         <Card.Image src={pokemon.img} width="100%" height={140} />
       </Card.Body>

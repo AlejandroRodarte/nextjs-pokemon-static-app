@@ -1,17 +1,27 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Card, Grid, Text } from '@nextui-org/react';
 
 import { PokemonSpriteCard } from './PokemonSpriteCard.component';
 import { PokemonFullInfoData } from '../../interfaces/props/pokemon-full-info-data.interface';
-import { PokemonNameAndAction } from './PokemonNameAndAction.component';
+import {
+  PokemonNameAndAction,
+  PokemonNameAndActionProps,
+} from './PokemonNameAndAction.component';
 import { PokemonSpritesGallery } from './PokemonSpritesGallery.component';
 
-interface PokemonDetailsProps {
+export interface PokemonDetailsProps {
   pokemon: PokemonFullInfoData;
+  onButtonClick: () => void;
 }
 
 export const PokemonDetails: React.FC<PokemonDetailsProps> = (props) => {
-  const { pokemon } = props;
+  const { pokemon, onButtonClick } = props;
+
+  const pokemonNameAndActionOnButtonClick = useCallback<
+    PokemonNameAndActionProps['onButtonClick']
+  >(() => {
+    onButtonClick();
+  }, [onButtonClick]);
 
   return (
     <Grid.Container css={{ marginTop: '5px' }} gap={2}>
@@ -29,6 +39,7 @@ export const PokemonDetails: React.FC<PokemonDetailsProps> = (props) => {
             <PokemonNameAndAction
               name={pokemon.name}
               buttonText="Guardar en Favoritos"
+              onButtonClick={pokemonNameAndActionOnButtonClick}
             />
           </Card.Header>
           <Card.Body>
