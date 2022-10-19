@@ -13,10 +13,11 @@ type CustomAppProps = AppProps & ExtraAppProps;
 
 function MyApp({ Component, pageProps }: CustomAppProps) {
   const getLayout = Component.getLayout || ((page) => page);
+  const getContexts = Component.getContexts || ((page) => page);
 
   return (
     <NextUIProvider theme={darkTheme}>
-      {getLayout(<Component {...pageProps} />)}
+      {getContexts(getLayout(<Component {...pageProps} />))}
     </NextUIProvider>
   );
 }

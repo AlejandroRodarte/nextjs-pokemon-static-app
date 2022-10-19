@@ -1,8 +1,9 @@
-import { ReactElement, ReactNode } from 'react';
+import { ReactElement } from 'react';
 import { NextPage } from 'next';
 
 type CustomNextPageProps<P> = {
-  getLayout?: (page: ReactElement<P>) => ReactNode;
+  getContexts?: (component: ReactElement<P>) => ReactElement;
+  getLayout?: (page: ReactElement<P>) => ReactElement;
 };
 
 export type CustomNextPage<P = {}, IP = P> = NextPage<P, IP> &

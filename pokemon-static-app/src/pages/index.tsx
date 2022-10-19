@@ -8,6 +8,7 @@ import { pokemonService } from '../services/server/pokemon.service';
 import { CustomNextPage } from '../types/next/custom-next-page.type';
 import { PokemonCardData } from '../interfaces/props/pokemon-card-data.interface';
 import { PokemonGrid, PokemonGridProps } from '../components/pokemon';
+import { FavoritesContextWrapper } from '../contexts/favorites/favorites.context';
 
 interface HomePageProps {
   pokemons: PokemonCardData[];
@@ -35,6 +36,10 @@ const HomePage: CustomNextPage<HomePageProps> = (props) => {
     />
   );
 };
+
+HomePage.getContexts = (page) => (
+  <FavoritesContextWrapper>{page}</FavoritesContextWrapper>
+);
 
 HomePage.getLayout = (page) => (
   <DefaultLayout title="Listado de Pokemons">{page}</DefaultLayout>
