@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next';
 
 import { DefaultLayout } from '../../../components/layouts';
@@ -13,7 +13,6 @@ import { PokemonLocalStorageMap } from '../../../types/local-storage/pokemon-loc
 import { pokemonLocalStorageKeys } from '../../../constants/local-storage/pokemon-local-storage-keys.constants';
 import { PokemonFavorite } from '../../../interfaces/local-storage/pokemon-favorite.interface';
 import { FavoriteMode } from '../../../types/pages/favorite-mode.type';
-import { IS_SERVER } from '../../../constants/common.constants';
 
 type PokemonPageUrlQuery = {
   id: string;
@@ -53,16 +52,15 @@ const PokemonPage: CustomNextPage<PokemonPageProps> = (props) => {
   const { get: getPokemonItem, set: setPokemonItem } =
     useLocalStorage<PokemonLocalStorageMap>();
 
-  const isPokemonOnFavorites = useMemo<boolean>(() => {
-    if (IS_SERVER) return false;
-    const favorites = getPokemonItem(pokemonLocalStorageKeys.FAVORITES);
-    if (!favorites) return false;
-    return !!favorites.find((pf) => pf.id === pokemonId);
-  }, [getPokemonItem, pokemonId]);
+  const [favoriteMode, setFavoriteMode] = useState<FavoriteMode>('save');
 
-  const [favoriteMode, setFavoriteMode] = useState<FavoriteMode>(
-    isPokemonOnFavorites ? 'delete' : 'save'
-  );
+  useEffect(() => {
+    const favorites = getPokemonItem(pokemonLocalStorageKeys.FAVORITES);
+    const isPokemonOnFavorites = !(
+      !favorites || !favorites.find((pf) => pf.id === pokemonId)
+    );
+    if (isPokemonOnFavorites) setFavoriteMode(() => 'delete');
+  }, [getPokemonItem, pokemonId, setFavoriteMode]);
 
   const pokemonDetailsOnButtonClick = useCallback<
     PokemonDetailsProps['onButtonClick']
