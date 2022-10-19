@@ -70,6 +70,7 @@ const PokemonPage: CustomNextPage<PokemonPageProps> = (props) => {
 
     if (!oldFavorites) {
       setPokemonItem(pokemonLocalStorageKeys.FAVORITES, [newFavorite]);
+      setFavoriteMode(() => 'delete');
     } else {
       const [newFavorites, newMode] = updateFavorites(
         oldFavorites,
