@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next';
 
 import { DefaultLayout } from '../../../components/layouts';
@@ -12,6 +12,8 @@ import { useLocalStorage } from '../../../hooks/use-local-storage.hook';
 import { PokemonLocalStorageMap } from '../../../types/local-storage/pokemon-local-storage-map.type';
 import { pokemonLocalStorageKeys } from '../../../constants/local-storage/pokemon-local-storage-keys.constants';
 import { PokemonFavorite } from '../../../interfaces/local-storage/pokemon-favorite.interface';
+import { FavoriteMode } from '../../../types/pages/favorite-mode.type';
+import { IS_SERVER } from '../../../constants/common.constants';
 
 type PokemonPageUrlQuery = {
   id: string;
@@ -24,18 +26,24 @@ interface PokemonPageProps {
 const updateFavorites = (
   oldFavorites: PokemonFavorite[],
   newFavorite: PokemonFavorite
-): PokemonFavorite[] => {
+): [PokemonFavorite[], FavoriteMode] => {
   const pokemonExists = !!oldFavorites.find((pf) => pf.id === newFavorite.id);
   let newFavorites: PokemonFavorite[];
+  let newMode: FavoriteMode;
 
-  if (!pokemonExists) newFavorites = [...oldFavorites, { id: newFavorite.id }];
-  else newFavorites = oldFavorites.filter((pf) => pf.id !== newFavorite.id);
+  if (!pokemonExists) {
+    newFavorites = [...oldFavorites, { id: newFavorite.id }];
+    newMode = 'delete';
+  } else {
+    newFavorites = oldFavorites.filter((pf) => pf.id !== newFavorite.id);
+    newMode = 'save';
+  }
 
   newFavorites.sort((pf1, pf2) =>
     pf1.id > pf2.id ? 1 : pf2.id < pf1.id ? -1 : 0
   );
 
-  return newFavorites;
+  return [newFavorites, newMode];
 };
 
 const PokemonPage: CustomNextPage<PokemonPageProps> = (props) => {
@@ -44,6 +52,17 @@ const PokemonPage: CustomNextPage<PokemonPageProps> = (props) => {
 
   const { get: getPokemonItem, set: setPokemonItem } =
     useLocalStorage<PokemonLocalStorageMap>();
+
+  const isPokemonOnFavorites = useMemo<boolean>(() => {
+    if (IS_SERVER) return false;
+    const favorites = getPokemonItem(pokemonLocalStorageKeys.FAVORITES);
+    if (!favorites) return false;
+    return !!favorites.find((pf) => pf.id === pokemonId);
+  }, [getPokemonItem, pokemonId]);
+
+  const [favoriteMode, setFavoriteMode] = useState<FavoriteMode>(
+    isPokemonOnFavorites ? 'delete' : 'save'
+  );
 
   const pokemonDetailsOnButtonClick = useCallback<
     PokemonDetailsProps['onButtonClick']
@@ -54,8 +73,12 @@ const PokemonPage: CustomNextPage<PokemonPageProps> = (props) => {
     if (!oldFavorites) {
       setPokemonItem(pokemonLocalStorageKeys.FAVORITES, [newFavorite]);
     } else {
-      const newFavorites = updateFavorites(oldFavorites, newFavorite);
+      const [newFavorites, newMode] = updateFavorites(
+        oldFavorites,
+        newFavorite
+      );
       setPokemonItem(pokemonLocalStorageKeys.FAVORITES, newFavorites);
+      setFavoriteMode(() => newMode);
     }
   }, [getPokemonItem, setPokemonItem, pokemonId]);
 
@@ -63,6 +86,7 @@ const PokemonPage: CustomNextPage<PokemonPageProps> = (props) => {
     <PokemonDetails
       pokemon={pokemon}
       onButtonClick={pokemonDetailsOnButtonClick}
+      favoriteMode={favoriteMode}
     />
   );
 };

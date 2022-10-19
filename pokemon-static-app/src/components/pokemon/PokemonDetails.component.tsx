@@ -8,14 +8,23 @@ import {
   PokemonNameAndActionProps,
 } from './PokemonNameAndAction.component';
 import { PokemonSpritesGallery } from './PokemonSpritesGallery.component';
+import { FavoriteMode } from '../../types/pages/favorite-mode.type';
 
 export interface PokemonDetailsProps {
   pokemon: PokemonFullInfoData;
   onButtonClick: () => void;
+  favoriteMode?: FavoriteMode;
 }
 
+const favoriteModeToPokemonNameAndActionButtonTextMap: {
+  [mode in FavoriteMode]: string;
+} = {
+  save: 'Guardar en Favoritos',
+  delete: 'Remover de Favoritos',
+};
+
 export const PokemonDetails: React.FC<PokemonDetailsProps> = (props) => {
-  const { pokemon, onButtonClick } = props;
+  const { pokemon, onButtonClick, favoriteMode = 'save' } = props;
 
   const pokemonNameAndActionOnButtonClick = useCallback<
     PokemonNameAndActionProps['onButtonClick']
@@ -38,7 +47,9 @@ export const PokemonDetails: React.FC<PokemonDetailsProps> = (props) => {
           >
             <PokemonNameAndAction
               name={pokemon.name}
-              buttonText="Guardar en Favoritos"
+              buttonText={
+                favoriteModeToPokemonNameAndActionButtonTextMap[favoriteMode]
+              }
               onButtonClick={pokemonNameAndActionOnButtonClick}
             />
           </Card.Header>
