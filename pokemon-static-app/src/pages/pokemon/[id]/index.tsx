@@ -13,6 +13,7 @@ import { PokemonLocalStorageMap } from '../../../types/local-storage/pokemon-loc
 import { pokemonLocalStorageKeys } from '../../../constants/local-storage/pokemon-local-storage-keys.constants';
 import { PokemonFavorite } from '../../../interfaces/local-storage/pokemon-favorite.interface';
 import { FavoriteMode } from '../../../types/pages/favorite-mode.type';
+import { insertToSortedArray } from '../../../helpers/arrays/insert-to-sorted-array.helper';
 
 type PokemonPageUrlQuery = {
   id: string;
@@ -31,16 +32,16 @@ const updateFavorites = (
   let newMode: FavoriteMode;
 
   if (!pokemonExists) {
-    newFavorites = [...oldFavorites, { id: newFavorite.id }];
+    newFavorites = insertToSortedArray(
+      oldFavorites,
+      newFavorite,
+      (midFavorite, newFavorite) => midFavorite.id < newFavorite.id
+    );
     newMode = 'delete';
   } else {
     newFavorites = oldFavorites.filter((pf) => pf.id !== newFavorite.id);
     newMode = 'save';
   }
-
-  newFavorites.sort((pf1, pf2) =>
-    pf1.id > pf2.id ? 1 : pf2.id < pf1.id ? -1 : 0
-  );
 
   return [newFavorites, newMode];
 };
