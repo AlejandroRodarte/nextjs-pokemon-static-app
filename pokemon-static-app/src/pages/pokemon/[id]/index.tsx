@@ -26,14 +26,25 @@ interface PokemonPageProps {
 
 const addFavoriteConfetti = (): void => {
   confettiService.addOne({
-    options: {
-      zIndex: 999,
-      particleCount: 100,
-      spread: 160,
-      angle: -100,
-      origin: {
-        x: 1,
-        y: 0,
+    common: {
+      add: {
+        shape: 'circle',
+      },
+    },
+    impl: {
+      add: {
+        canvasConfetti: {
+          options: {
+            zIndex: 999,
+            particleCount: 100,
+            spread: 160,
+            angle: -100,
+            origin: {
+              x: 1,
+              y: 0,
+            },
+          },
+        },
       },
     },
   });

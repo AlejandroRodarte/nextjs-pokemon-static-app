@@ -1,26 +1,28 @@
+import { AddImplArgs } from '../../interfaces/adapters/confetti-adapter.interface';
 import { canvasConfettiAdapter } from '../../adapters/confetti/canvas-confetti.adapter';
-import {
-  ConfettiImplName,
-  ConfettiAddArgs,
-} from '../../interfaces/adapters/confetti-adapter.interface';
-
 import { ConfettiAdapter } from '../../interfaces/adapters/confetti-adapter.interface';
 
-export class ConfettiService<ImplName extends ConfettiImplName> {
-  private readonly implName: ImplName;
+interface AddOneArgs {
+  common: {
+    add: {
+      shape: 'square' | 'circle';
+    };
+  };
+  impl: {
+    add: AddImplArgs;
+  };
+}
+
+export class ConfettiService {
   private readonly confetti: ConfettiAdapter;
 
-  constructor(implName: ImplName, confetti: ConfettiAdapter) {
-    this.implName = implName;
+  constructor(confetti: ConfettiAdapter) {
     this.confetti = confetti;
   }
 
-  addOne(implArgs: ConfettiAddArgs[ImplName]) {
-    this.confetti.add({ implData: { type: this.implName, args: implArgs } });
+  addOne(args: AddOneArgs) {
+    this.confetti.add({ shape: args.common.add.shape }, args.impl.add);
   }
 }
 
-export const confettiService = new ConfettiService(
-  'canvas-confetti',
-  canvasConfettiAdapter
-);
+export const confettiService = new ConfettiService(canvasConfettiAdapter);
