@@ -1,5 +1,5 @@
-import { FavoritesState } from '../../interfaces/contexts/favorites-state.interface';
 import { FavoritesAction } from '../../types/contexts/favorites-action.type';
+import { FavoritesState } from '../../interfaces/contexts/favorites-state.interface';
 import { TEST_ACTION } from './favorites.action-types';
 
 export const reducer = (

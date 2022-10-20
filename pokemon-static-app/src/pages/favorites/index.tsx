@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 
-import { DefaultLayout } from '../../components/layouts';
 import { CustomNextPage } from '../../types/next/custom-next-page.type';
+import { DefaultLayout } from '../../components/layouts';
 import { NoFavoritePokemons } from '../../components/pokemon/NoFavoritePokemons';
-import { useLocalStorage } from '../../hooks/use-local-storage.hook';
-import { PokemonLocalStorageMap } from '../../types/local-storage/pokemon-local-storage-map.type';
 import { PokemonFavorite } from '../../interfaces/local-storage/pokemon-favorite.interface';
-import { pokemonLocalStorageKeys } from '../../constants/local-storage/pokemon-local-storage-keys.constants';
 import { PokemonGrid, PokemonGridProps } from '../../components/pokemon';
+import { pokemonLocalStorageKeys } from '../../constants/local-storage/pokemon-local-storage-keys.constants';
+import { PokemonLocalStorageMap } from '../../types/local-storage/pokemon-local-storage-map.type';
+import { useLocalStorage } from '../../hooks/use-local-storage.hook';
 
 interface FavoritesPageProps {}
 

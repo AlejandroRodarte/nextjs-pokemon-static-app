@@ -3,9 +3,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Spacer, Text, useTheme } from '@nextui-org/react';
 
-import classes from './MainNavbar.module.css';
 import { env } from '../../../config/env.config';
 import { IS_SERVER } from '../../../constants/common.constants';
+
+import classes from './MainNavbar.module.css';
 
 interface MainNavbarProps {}
 

@@ -2,13 +2,13 @@ import { useCallback } from 'react';
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 
+import { CustomNextPage } from '../types/next/custom-next-page.type';
 import { DefaultLayout } from '../components/layouts';
 import { env } from '../config/env.config';
-import { pokemonService } from '../services/server/pokemon.service';
-import { CustomNextPage } from '../types/next/custom-next-page.type';
+import { FavoritesContextWrapper } from '../contexts/favorites/favorites.context';
 import { PokemonCardData } from '../interfaces/props/pokemon-card-data.interface';
 import { PokemonGrid, PokemonGridProps } from '../components/pokemon';
-import { FavoritesContextWrapper } from '../contexts/favorites/favorites.context';
+import { pokemonService } from '../services/server/pokemon.service';
 
 interface HomePageProps {
   pokemons: PokemonCardData[];

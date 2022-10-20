@@ -1,8 +1,8 @@
 import { AxiosInstance } from 'axios';
 
-import { HttpAdapter } from '../../interfaces/adapters/http-adapter.interface';
 import { asyncWrapper } from '../../helpers/wrappers/async-wrapper.helper';
 import { DataErrorTuple } from '../../types/common/data-error-tuple.type';
+import { HttpAdapter } from '../../interfaces/adapters/http-adapter.interface';
 import { pokeApiAxios } from '../../axios/server/poke-api.axios';
 
 export class AxiosAdapter implements HttpAdapter {

@@ -3,7 +3,7 @@ FROM node:16-alpine as base
 LABEL org.opencontainers.image.authors alejandrorodarte1@gmail.com
 LABEL org.opencontainers.image.title "Base image for a Pokemon Static website built with Next.js"
 LABEL org.opencontainers.image.url https://hub.docker.com/repository/docker/rodarte/nextjs-fr-pokemon-static-app-prod
-LABEL org.opencontainers.image.source https://github.com/AlejandroRodarte/nextjs-pokemon-static-app/tree/master/pokemon-static-app
+LABEL org.opencontainers.image.source https://github.com/AlejandroRodarte/nextjs-pokemon-static-app/tree/main/pokemon-static-app
 LABEL org.opencontainers.image.licenses MIT
 
 LABEL com.rodarte.nextjs.fr.pokemon-static-app.nodeversion $NODE_VERSION

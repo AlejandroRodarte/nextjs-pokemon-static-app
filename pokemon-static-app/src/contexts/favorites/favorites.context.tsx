@@ -5,11 +5,11 @@ import React, {
   useReducer,
 } from 'react';
 
-import { state } from './favorites.state';
-import { reducer } from './favorites.reducer';
-import { StoreLikeContext } from '../../interfaces/contexts/store-like-context.interface';
-import { FavoritesState } from '../../interfaces/contexts/favorites-state.interface';
 import { FavoritesAction } from '../../types/contexts/favorites-action.type';
+import { FavoritesState } from '../../interfaces/contexts/favorites-state.interface';
+import { reducer } from './favorites.reducer';
+import { state } from './favorites.state';
+import { StoreLikeContext } from '../../interfaces/contexts/store-like-context.interface';
 
 interface FavoritesContext
   extends StoreLikeContext<FavoritesState, FavoritesAction> {}

@@ -1,14 +1,14 @@
 import React, { useCallback } from 'react';
 import { Card, Grid, Text } from '@nextui-org/react';
 
-import { PokemonSpriteCard } from './PokemonSpriteCard.component';
+import { FavoriteMode } from '../../types/pages/favorite-mode.type';
 import { PokemonFullInfoData } from '../../interfaces/props/pokemon-full-info-data.interface';
 import {
   PokemonNameAndAction,
   PokemonNameAndActionProps,
 } from './PokemonNameAndAction.component';
+import { PokemonSpriteCard } from './PokemonSpriteCard.component';
 import { PokemonSpritesGallery } from './PokemonSpritesGallery.component';
-import { FavoriteMode } from '../../types/pages/favorite-mode.type';
 
 export interface PokemonDetailsProps {
   pokemon: PokemonFullInfoData;

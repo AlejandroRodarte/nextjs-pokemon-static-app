@@ -1,8 +1,8 @@
-import { HttpAdapter } from '../../interfaces/adapters/http-adapter.interface';
-import { GetPokemonsResponse } from '../../interfaces/pokemon/get-pokemons-response.interface';
 import { DataErrorTuple } from '../../types/common/data-error-tuple.type';
-import { pokemonAxiosAdapter } from '../../adapters/http/axios.adapter';
 import { GetPokemonResponse } from '../../interfaces/pokemon/get-pokemon-response.interface';
+import { GetPokemonsResponse } from '../../interfaces/pokemon/get-pokemons-response.interface';
+import { HttpAdapter } from '../../interfaces/adapters/http-adapter.interface';
+import { pokemonAxiosAdapter } from '../../adapters/http/axios.adapter';
 
 type GetPokemonsQueryParams = {
   limit: string;

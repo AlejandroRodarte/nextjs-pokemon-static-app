@@ -1,8 +1,9 @@
 import React, { ReactNode } from 'react';
 import Head from 'next/head';
 
-import classes from './DefaultLayout.module.css';
 import { MainNavbar } from '../ui/navbar/MainNavbar.component';
+
+import classes from './DefaultLayout.module.css';
 
 interface DefaultLayoutProps {
   children: ReactNode;

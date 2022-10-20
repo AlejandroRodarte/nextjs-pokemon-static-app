@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
 import { Grid } from '@nextui-org/react';
 
-import { PokemonCardData } from '../../interfaces/props/pokemon-card-data.interface';
 import { PokemonCard, PokemonCardProps } from './PokemonCard.component';
+import { PokemonCardData } from '../../interfaces/props/pokemon-card-data.interface';
 
 export interface PokemonGridProps {
   pokemons: PokemonCardData[];

@@ -1,19 +1,19 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next';
 
+import { CustomNextPage } from '../../../types/next/custom-next-page.type';
 import { DefaultLayout } from '../../../components/layouts';
 import { env } from '../../../config/env.config';
-import { CustomNextPage } from '../../../types/next/custom-next-page.type';
-import { pokemonService } from '../../../services/server/pokemon.service';
-import { PokemonFullInfoData } from '../../../interfaces/props/pokemon-full-info-data.interface';
-import { PokemonDetails } from '../../../components/pokemon';
-import { PokemonDetailsProps } from '../../../components/pokemon/PokemonDetails.component';
-import { useLocalStorage } from '../../../hooks/use-local-storage.hook';
-import { PokemonLocalStorageMap } from '../../../types/local-storage/pokemon-local-storage-map.type';
-import { pokemonLocalStorageKeys } from '../../../constants/local-storage/pokemon-local-storage-keys.constants';
-import { PokemonFavorite } from '../../../interfaces/local-storage/pokemon-favorite.interface';
 import { FavoriteMode } from '../../../types/pages/favorite-mode.type';
 import { insertToSortedArray } from '../../../helpers/arrays/insert-to-sorted-array.helper';
+import { PokemonDetails } from '../../../components/pokemon';
+import { PokemonDetailsProps } from '../../../components/pokemon/PokemonDetails.component';
+import { PokemonFavorite } from '../../../interfaces/local-storage/pokemon-favorite.interface';
+import { PokemonFullInfoData } from '../../../interfaces/props/pokemon-full-info-data.interface';
+import { pokemonLocalStorageKeys } from '../../../constants/local-storage/pokemon-local-storage-keys.constants';
+import { PokemonLocalStorageMap } from '../../../types/local-storage/pokemon-local-storage-map.type';
+import { pokemonService } from '../../../services/server/pokemon.service';
+import { useLocalStorage } from '../../../hooks/use-local-storage.hook';
 
 type PokemonPageUrlQuery = {
   id: string;
