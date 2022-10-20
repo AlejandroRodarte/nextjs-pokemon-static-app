@@ -18,7 +18,8 @@ export interface ConfettiAddCommonArgs {
 /**
  * app-specific confetti adapter: uses impl-specific args
  */
-export interface ConfettiAdapter extends BaseConfettiAdapter<ConfettiImplArgs> {}
+export interface ConfettiAdapter
+  extends BaseConfettiAdapter<ConfettiImplArgs> {}
 
 interface ConfettiImplArgs {
   add: ConfettiAddImplArgs;
@@ -34,7 +35,7 @@ export interface ConfettiAddImplArgs {
 
 export interface AnotherCanvasConfettiAddArgs {
   options: {
-    timeout: number;
+    color: string;
   };
 }
 

@@ -1,7 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next';
 
-import { confettiService } from '../../../services/client/confetti.service';
+import {
+  AddManyWithTimersArgs,
+  AddOneArgs,
+  confettiService,
+} from '../../../services/client/confetti.service';
 import { CustomNextPage } from '../../../types/next/custom-next-page.type';
 import { DefaultLayout } from '../../../components/layouts';
 import { env } from '../../../config/env.config';
@@ -25,23 +29,22 @@ interface PokemonPageProps {
 }
 
 const addFavoriteConfetti = (): void => {
-  confettiService.addOne({
-    shape: 'square',
-    implArgs: {
-      canvasConfetti: {
-        options: {
-          zIndex: 999,
-          particleCount: 100,
-          spread: 160,
-          angle: -100,
-          origin: {
-            x: 1,
-            y: 0,
-          },
-        },
-      },
+  const addOneArgs: AddOneArgs = {
+    shape: 'circle',
+    origin: {
+      x: 1,
+      y: 0,
     },
-  });
+    color: 'blue',
+  };
+  const timers: number[] = [0, 50, 100];
+
+  const sequence: AddManyWithTimersArgs = timers.map((ms) => ({
+    ...addOneArgs,
+    ms,
+  }));
+
+  confettiService.addManyWithIntervals(sequence);
 };
 
 const updateFavorites = (
