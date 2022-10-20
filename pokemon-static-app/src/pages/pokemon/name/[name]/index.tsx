@@ -1,6 +1,7 @@
 import { GetStaticProps, GetStaticPaths, GetStaticPathsResult } from 'next';
 
 import { CustomNextPage } from '../../../../types/next/custom-next-page.type';
+import { DefaultLayout } from '../../../../components/layouts';
 import { env } from '../../../../config/env.config';
 import { mapGetPokemonResponseToPokemonFullInfoData } from '../../../../helpers/object-mappers/map-get-pokemon-response-to-pokemon-full-info-data.helper';
 import { PokemonDetails } from '../../../../components/pokemon';
@@ -35,6 +36,10 @@ const PokemonNamePage: CustomNextPage<PokemonNamePageProps> = (props) => {
     />
   );
 };
+
+PokemonNamePage.getLayout = (page) => (
+  <DefaultLayout title={page.props.pokemon.name}>{page}</DefaultLayout>
+);
 
 export const getStaticPaths: GetStaticPaths<PokemonNamePageUrlQuery> = async (
   context

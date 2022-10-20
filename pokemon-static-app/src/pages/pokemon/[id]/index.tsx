@@ -39,7 +39,7 @@ const PokemonPage: CustomNextPage<PokemonPageProps> = (props) => {
 };
 
 PokemonPage.getLayout = (page) => (
-  <DefaultLayout title="Algun pokemon">{page}</DefaultLayout>
+  <DefaultLayout title={page.props.pokemon.name}>{page}</DefaultLayout>
 );
 
 export const getStaticPaths: GetStaticPaths<PokemonPageUrlQuery> = (
