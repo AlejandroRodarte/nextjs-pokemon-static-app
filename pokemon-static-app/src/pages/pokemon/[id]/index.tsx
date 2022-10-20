@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { GetStaticPaths, GetStaticPathsResult, GetStaticProps } from 'next';
 
+import { confettiService } from '../../../services/client/confetti.service';
 import { CustomNextPage } from '../../../types/next/custom-next-page.type';
 import { DefaultLayout } from '../../../components/layouts';
 import { env } from '../../../config/env.config';
@@ -23,6 +24,21 @@ interface PokemonPageProps {
   pokemon: PokemonFullInfoData;
 }
 
+const addFavoriteConfetti = (): void => {
+  confettiService.addOne({
+    options: {
+      zIndex: 999,
+      particleCount: 100,
+      spread: 160,
+      angle: -100,
+      origin: {
+        x: 1,
+        y: 0,
+      },
+    },
+  });
+};
+
 const updateFavorites = (
   oldFavorites: PokemonFavorite[],
   newFavorite: PokemonFavorite
@@ -38,6 +54,7 @@ const updateFavorites = (
       (midFavorite, newFavorite) => midFavorite.id < newFavorite.id
     );
     newMode = 'delete';
+    addFavoriteConfetti();
   } else {
     newFavorites = oldFavorites.filter((pf) => pf.id !== newFavorite.id);
     newMode = 'save';
