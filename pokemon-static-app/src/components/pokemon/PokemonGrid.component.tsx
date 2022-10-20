@@ -6,7 +6,7 @@ import { PokemonCardData } from '../../interfaces/props/pokemon-card-data.interf
 
 export interface PokemonGridProps {
   pokemons: PokemonCardData[];
-  onPokemonCardClick: (pokemonId: number) => void;
+  onPokemonCardClick: (pokemonName: string) => void;
 }
 
 export const PokemonGrid: React.FC<PokemonGridProps> = (props) => {
@@ -15,8 +15,8 @@ export const PokemonGrid: React.FC<PokemonGridProps> = (props) => {
   const pokemonCardOnPokemonCardClick = useCallback<
     PokemonCardProps['onPokemonCardClick']
   >(
-    (pokemonId) => {
-      onPokemonCardClick(pokemonId);
+    (pokemonName) => {
+      onPokemonCardClick(pokemonName);
     },
     [onPokemonCardClick]
   );

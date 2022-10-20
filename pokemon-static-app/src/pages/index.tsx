@@ -23,8 +23,8 @@ const HomePage: CustomNextPage<HomePageProps> = (props) => {
   const pokemonGridOnPokemonCardClick = useCallback<
     PokemonGridProps['onPokemonCardClick']
   >(
-    (pokemonId) => {
-      push(`/pokemon/${pokemonId}`);
+    (pokemonName) => {
+      push(`/pokemon/name/${pokemonName}`);
     },
     [push]
   );

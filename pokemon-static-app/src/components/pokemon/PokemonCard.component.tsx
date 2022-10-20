@@ -7,16 +7,16 @@ type OnCardClickHandler = () => void;
 
 export interface PokemonCardProps {
   pokemon: PokemonCardData;
-  onPokemonCardClick: (pokemonId: number) => void;
+  onPokemonCardClick: (pokemonName: string) => void;
 }
 
 export const PokemonCard: React.FC<PokemonCardProps> = (props) => {
   const { pokemon, onPokemonCardClick } = props;
-  const { id: pokemonId } = pokemon;
+  const { name: pokemonName } = pokemon;
 
   const onCardClick = useCallback<OnCardClickHandler>(() => {
-    onPokemonCardClick(pokemonId);
-  }, [onPokemonCardClick, pokemonId]);
+    onPokemonCardClick(pokemonName);
+  }, [onPokemonCardClick, pokemonName]);
 
   return (
     <Card isHoverable isPressable onPress={onCardClick}>
