@@ -1,15 +1,25 @@
 import confetti from 'canvas-confetti';
 
 export interface ConfettiAdapter {
-  add(commonArgs: AddCommonArgs, implArgs: AddImplArgs): void;
+  add(commonArgs: ConfettiAddCommonArgs, implArgs: ConfettiAddImplArgs): void;
 }
 
-export interface AddCommonArgs {
+/**
+ * add() common and implementation-specific args
+ */
+export interface ConfettiAddCommonArgs {
   shape: 'square' | 'circle';
 }
 
-export interface AddImplArgs {
+export interface ConfettiAddImplArgs {
+  anotherCanvasConfetti?: AnotherCanvasConfettiAddArgs;
   canvasConfetti?: CanvasConfettiAddArgs;
+}
+
+export interface AnotherCanvasConfettiAddArgs {
+  options: {
+    timeout: number;
+  };
 }
 
 export interface CanvasConfettiAddArgs {

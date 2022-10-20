@@ -1,16 +1,12 @@
-import { AddImplArgs } from '../../interfaces/adapters/confetti-adapter.interface';
 import { canvasConfettiAdapter } from '../../adapters/confetti/canvas-confetti.adapter';
-import { ConfettiAdapter } from '../../interfaces/adapters/confetti-adapter.interface';
+import {
+  ConfettiAdapter,
+  ConfettiAddImplArgs,
+} from '../../interfaces/adapters/confetti-adapter.interface';
 
 interface AddOneArgs {
-  common: {
-    add: {
-      shape: 'square' | 'circle';
-    };
-  };
-  impl: {
-    add: AddImplArgs;
-  };
+  shape: 'square' | 'circle';
+  implArgs: ConfettiAddImplArgs;
 }
 
 export class ConfettiService {
@@ -21,7 +17,8 @@ export class ConfettiService {
   }
 
   addOne(args: AddOneArgs) {
-    this.confetti.add(args.common.add, args.impl.add);
+    const { shape, implArgs } = args;
+    this.confetti.add({ shape }, implArgs);
   }
 }
 

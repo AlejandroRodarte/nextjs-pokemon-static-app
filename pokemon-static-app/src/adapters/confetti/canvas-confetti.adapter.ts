@@ -1,13 +1,13 @@
 import confetti from 'canvas-confetti';
 
 import {
-  AddCommonArgs,
-  AddImplArgs,
+  ConfettiAddCommonArgs,
+  ConfettiAddImplArgs,
 } from '../../interfaces/adapters/confetti-adapter.interface';
 import { ConfettiAdapter } from '../../interfaces/adapters/confetti-adapter.interface';
 
 export class CanvasConfettiAdapter implements ConfettiAdapter {
-  add(commonArgs: AddCommonArgs, implArgs: AddImplArgs): void {
+  add(commonArgs: ConfettiAddCommonArgs, implArgs: ConfettiAddImplArgs): void {
     confetti({
       ...implArgs.canvasConfetti?.options,
       shapes: [commonArgs.shape],
