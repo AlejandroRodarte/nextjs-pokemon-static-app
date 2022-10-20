@@ -15,16 +15,17 @@ const origin = IS_SERVER ? '' : window.origin;
 
 export const DefaultLayout: React.FC<DefaultLayoutProps> = (props) => {
   const { children, title = 'Pokemon Static App' } = props;
+  const capitalizedTitle = `${title.charAt(0).toUpperCase()}${title.slice(1)}`;
 
   return (
     <>
       <Head>
-        <title>{title}</title>
+        <title>{capitalizedTitle}</title>
         <meta name="author" content="Alejandro Rodarte" />
         <meta name="description" content={`Informacion sobre ${title}`} />
         <meta name="keywords" content={`${title}, Pokemon, Pokedex`} />
         {/* Open Graph Meta Tags: https://ahrefs.com/blog/open-graph-meta-tags/ */}
-        <meta property="og:title" content={title} />
+        <meta property="og:title" content={capitalizedTitle} />
         <meta
           property="og:description"
           content={`Informacion sobre ${title}`}
