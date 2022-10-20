@@ -54,11 +54,10 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async (
 
   const pokemons: PokemonCardData[] = smallPokemons.map((sp) => {
     const name = sp.name;
-    const url = sp.url;
-    const urlSplit = url.split('/');
+    const urlSplit = sp.url.split('/');
     const id = +urlSplit[urlSplit.length - 2];
     const img = `${env.server.pokemon.spritesUrl}/other/dream-world/${id}.svg`;
-    return { id, img, name, url };
+    return { id, img, name };
   });
 
   return { props: { pokemons } };

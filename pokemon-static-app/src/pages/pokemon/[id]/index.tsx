@@ -48,7 +48,15 @@ const updateFavorites = (
 
 const PokemonPage: CustomNextPage<PokemonPageProps> = (props) => {
   const { pokemon } = props;
-  const { id: pokemonId } = pokemon;
+  const {
+    id: pokemonId,
+    name: pokemonName,
+    sprites: {
+      other: {
+        dream_world: { front_default: pokemonImg = '/no-image.png' },
+      },
+    },
+  } = pokemon;
 
   const { get: getPokemonItem, set: setPokemonItem } =
     useLocalStorage<PokemonLocalStorageMap>();
@@ -66,7 +74,11 @@ const PokemonPage: CustomNextPage<PokemonPageProps> = (props) => {
   const pokemonDetailsOnButtonClick = useCallback<
     PokemonDetailsProps['onButtonClick']
   >(() => {
-    const newFavorite = { id: pokemonId };
+    const newFavorite: PokemonFavorite = {
+      id: pokemonId,
+      name: pokemonName,
+      img: pokemonImg,
+    };
     const oldFavorites = getPokemonItem(pokemonLocalStorageKeys.FAVORITES);
 
     if (!oldFavorites) {
@@ -80,7 +92,7 @@ const PokemonPage: CustomNextPage<PokemonPageProps> = (props) => {
       setPokemonItem(pokemonLocalStorageKeys.FAVORITES, newFavorites);
       setFavoriteMode(() => newMode);
     }
-  }, [getPokemonItem, setPokemonItem, pokemonId]);
+  }, [getPokemonItem, setPokemonItem, pokemonId, pokemonName, pokemonImg]);
 
   return (
     <PokemonDetails

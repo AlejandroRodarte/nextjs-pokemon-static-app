@@ -21,6 +21,7 @@ export const NoFavoritePokemons: React.FC<NoFavoritePokemonsProps> = () => {
       <Text h1>No hay favoritos</Text>
       <Image
         src={`${env.public.pokemon.spritesUrl}/${env.public.pokemon.noFavoritesLogoPath}`}
+        alt="No hay pokemons"
         width={250}
         height={250}
         style={{ opacity: 0.1 }}
