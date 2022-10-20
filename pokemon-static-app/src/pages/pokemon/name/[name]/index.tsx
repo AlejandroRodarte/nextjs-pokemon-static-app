@@ -41,7 +41,7 @@ export const getStaticPaths: GetStaticPaths<PokemonNamePageUrlQuery> = async (
 ) => {
   const limit = env.server.isDev ? 10 : env.server.pokemon.limit;
   const [smallPokemons, error] = await pokemonService.getPokemons(limit);
-  if (error || !smallPokemons) return { paths: [], fallback: true };
+  if (error || !smallPokemons) return { paths: [], fallback: false };
 
   const paths: GetStaticPathsResult<PokemonNamePageUrlQuery>['paths'] =
     smallPokemons.map((sp) => ({
