@@ -21,7 +21,7 @@ export class ConfettiService {
   }
 
   addOne(args: AddOneArgs) {
-    this.confetti.add({ shape: args.common.add.shape }, args.impl.add);
+    this.confetti.add(args.common.add, args.impl.add);
   }
 }
 
