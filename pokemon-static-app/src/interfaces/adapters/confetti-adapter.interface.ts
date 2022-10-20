@@ -1,7 +1,5 @@
 import confetti from 'canvas-confetti';
 
-export type ConfettiImplName = 'canvas-confetti';
-
 export interface ConfettiAdapter {
   add(commonArgs: AddCommonArgs, implArgs: AddImplArgs): void;
 }
