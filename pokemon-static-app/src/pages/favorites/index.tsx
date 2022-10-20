@@ -47,7 +47,7 @@ const FavoritesPage: CustomNextPage<FavoritesPageProps> = () => {
 };
 
 FavoritesPage.getLayout = (page) => (
-  <DefaultLayout title="Pokemons - Favoritos">{page}</DefaultLayout>
+  <DefaultLayout title="tus pokemons favoritos">{page}</DefaultLayout>
 );
 
 export default FavoritesPage;

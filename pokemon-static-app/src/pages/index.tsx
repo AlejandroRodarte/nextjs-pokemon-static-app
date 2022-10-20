@@ -42,7 +42,7 @@ HomePage.getContexts = (page) => (
 );
 
 HomePage.getLayout = (page) => (
-  <DefaultLayout title="Listado de Pokemons">{page}</DefaultLayout>
+  <DefaultLayout title="todos los pokemons">{page}</DefaultLayout>
 );
 
 export const getStaticProps: GetStaticProps<HomePageProps> = async (
