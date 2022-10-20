@@ -1,8 +1,18 @@
 import confetti from 'canvas-confetti';
 
-export interface ConfettiAdapter {
-  add(commonArgs: ConfettiAddCommonArgs, implArgs: ConfettiAddImplArgs): void;
+type BaseImplArgs = {
+  add: object;
+};
+
+interface BaseConfettiAdapter<ImplArgs extends BaseImplArgs = BaseImplArgs> {
+  add(commonArgs: ConfettiAddCommonArgs, implArgs: ImplArgs['add']): void;
 }
+
+interface ConfettiImplArgs {
+  add: ConfettiAddImplArgs;
+}
+
+export interface ConfettiAdapter extends BaseConfettiAdapter<ConfettiImplArgs> {}
 
 /**
  * add() common and implementation-specific args
