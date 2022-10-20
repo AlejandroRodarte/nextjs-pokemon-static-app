@@ -3,6 +3,7 @@ import getConfig from 'next/config';
 interface Config {
   publicRuntimeConfig: {
     stage: string;
+    noFavoritePokemonsLogoRelativePath: string;
     pokeApiUrl: string;
     pokemonSpritesUrl: string;
     pokemonSpriteLogoRelativePath: string;
@@ -24,6 +25,7 @@ interface Env {
     pokemon: {
       api: string;
       logoPath: string;
+      noFavoritesLogoPath: string;
       spritesUrl: string;
     };
   };
@@ -53,6 +55,8 @@ export const env: Env = {
     pokemon: {
       api: publicRuntimeConfig.pokeApiUrl,
       logoPath: publicRuntimeConfig.pokemonSpriteLogoRelativePath,
+      noFavoritesLogoPath:
+        publicRuntimeConfig.noFavoritePokemonsLogoRelativePath,
       spritesUrl: publicRuntimeConfig.pokemonSpritesUrl,
     },
   },

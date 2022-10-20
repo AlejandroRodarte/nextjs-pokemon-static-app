@@ -6,6 +6,8 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   publicRuntimeConfig: {
+    noFavoritePokemonsLogoRelativePath:
+      process.env.NEXT_PUBLIC_NO_FAVORITE_POKEMONS_LOGO_RELATIVE_PATH || '',
     pokeApiUrl: process.env.NEXT_PUBLIC_POKEAPI_URL || '',
     pokemonSpriteLogoRelativePath:
       process.env.NEXT_PUBLIC_POKEMON_SPRITE_LOGO_RELATIVE_PATH || '',
