@@ -16,7 +16,7 @@ export class ConfettiService {
     this.confetti = confetti;
   }
 
-  addOne(args: AddOneArgs) {
+  addOne(args: AddOneArgs): void {
     const { shape, implArgs } = args;
     this.confetti.add({ shape }, implArgs);
   }
