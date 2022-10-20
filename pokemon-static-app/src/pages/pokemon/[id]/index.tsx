@@ -28,7 +28,7 @@ interface PokemonPageProps {
   pokemon: PokemonFullInfoData;
 }
 
-const addFavoriteConfetti = (): void => {
+const addConfettiOnFavorite = (): void => {
   const addOneArgs: AddOneArgs = {
     shape: 'circle',
     origin: {
@@ -62,7 +62,7 @@ const updateFavorites = (
       (midFavorite, newFavorite) => midFavorite.id < newFavorite.id
     );
     newMode = 'delete';
-    addFavoriteConfetti();
+    addConfettiOnFavorite();
   } else {
     newFavorites = oldFavorites.filter((pf) => pf.id !== newFavorite.id);
     newMode = 'save';
