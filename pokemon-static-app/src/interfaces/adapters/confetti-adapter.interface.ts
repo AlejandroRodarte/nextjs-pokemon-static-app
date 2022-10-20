@@ -29,8 +29,8 @@ interface ConfettiImplArgs {
  * add() impl-specific args for 'another-canvas-confetti' and 'canvas-confetti'
  */
 export interface ConfettiAddImplArgs {
-  anotherCanvasConfetti?: AnotherCanvasConfettiAddArgs;
-  canvasConfetti?: CanvasConfettiAddArgs;
+  anotherCanvasConfetti: AnotherCanvasConfettiAddArgs;
+  canvasConfetti: CanvasConfettiAddArgs;
 }
 
 export interface AnotherCanvasConfettiAddArgs {

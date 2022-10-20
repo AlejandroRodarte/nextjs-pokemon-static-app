@@ -6,7 +6,7 @@ import {
 
 export class AnotherCanvasConfettiAdapter implements ConfettiAdapter {
   add(commonArgs: ConfettiAddCommonArgs, implArgs: ConfettiAddImplArgs): void {
-    console.log(commonArgs.shape, implArgs.anotherCanvasConfetti?.options);
+    console.log(commonArgs.shape, implArgs.anotherCanvasConfetti.options);
   }
 }
 

@@ -9,7 +9,7 @@ import { ConfettiAdapter } from '../../interfaces/adapters/confetti-adapter.inte
 export class CanvasConfettiAdapter implements ConfettiAdapter {
   add(commonArgs: ConfettiAddCommonArgs, implArgs: ConfettiAddImplArgs): void {
     confetti({
-      ...implArgs.canvasConfetti?.options,
+      ...implArgs.canvasConfetti.options,
       shapes: [commonArgs.shape],
     });
   }
