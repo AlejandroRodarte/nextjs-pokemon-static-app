@@ -25,11 +25,11 @@ export class PokemonService {
     return [response?.results, error];
   }
 
-  async getPokemon(
-    id: string
+  async getPokemonByIndex(
+    index: string
   ): Promise<DataErrorTuple<GetPokemonResponse, Error>> {
     const [response, error] = await this.http.get<GetPokemonResponse>({
-      url: `pokemon/${id}`,
+      url: `pokemon/${index}`,
     });
     return [response, error];
   }
