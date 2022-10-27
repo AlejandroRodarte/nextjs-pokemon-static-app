@@ -2,7 +2,7 @@
   "name": "nextjs-fr-pokemon-static-app",
   "version": "0.0.1",
   "private": true,
-  "description": "Pokemon Static Application built with Next.js as part of a Udemy course made by Fernando Herrera. Now trying to upgrade to Next.js 13",
+  "description": "Pokemon Static Application built with Next.js as part of a Udemy course made by Fernando Herrera",
   "author": "Alejandro Rodarte Mendoza",
   "scripts": {
     "dev": "next dev",
