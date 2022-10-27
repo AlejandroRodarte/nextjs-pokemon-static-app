@@ -29,116 +29,113 @@ jobs:
       - name: Checkout 🛎
         uses: actions/checkout@master
 
-      - name: Set useful github env vars
-        uses: FranzDiebold/github-env-vars-action@v1.2.0
-
       - name: Get commit hash, date, and github ref slug
         id: vars
         shell: bash
         run: |
           echo "::set-output name=sha_short::$(git log -1 --format="%h")"
           echo "::set-output name=created_date::$(date "+%s")"
-          echo "::set-output name=branch_name::$GITHUB_REF_SLUG"
+          echo "$(git branch)"
 
 
 
-  paths-filter:
-    runs-on: ${{ matrix.os }}
+  # paths-filter:
+  #   runs-on: ${{ matrix.os }}
 
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
+  #   strategy:
+  #     matrix:
+  #       os: [ubuntu-latest]
 
-    outputs:
-      dependency-files: ${{ steps.changes.outputs.dependency-files }}
-    steps:
-      - name: Checkout 🛎
-        uses: actions/checkout@master
+  #   outputs:
+  #     dependency-files: ${{ steps.changes.outputs.dependency-files }}
+  #   steps:
+  #     - name: Checkout 🛎
+  #       uses: actions/checkout@master
 
-      - name: Create path filters
-        uses: dorny/paths-filter@v2
-        id: changes
-        with:
-          filters: |
-            dependency-files:
-              - 'pokemon-static-app/package.json'
-              - 'pokemon-static-app/yarn.lock'
+  #     - name: Create path filters
+  #       uses: dorny/paths-filter@v2
+  #       id: changes
+  #       with:
+  #         filters: |
+  #           dependency-files:
+  #             - 'pokemon-static-app/package.json'
+  #             - 'pokemon-static-app/yarn.lock'
 
 
-  build:
-    runs-on: ${{ matrix.os }}
-    needs: [build-vars, paths-filter]
+  # build:
+  #   runs-on: ${{ matrix.os }}
+  #   needs: [build-vars, paths-filter]
 
-    if: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') || (github.event_name == 'pull_request' && github.base_ref == 'main') }}
+  #   if: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') || (github.event_name == 'pull_request' && github.base_ref == 'main') }}
 
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
+  #   strategy:
+  #     matrix:
+  #       os: [ubuntu-latest]
 
-    steps:
-      - name: Checkout 🛎
-        uses: actions/checkout@master
+  #   steps:
+  #     - name: Checkout 🛎
+  #       uses: actions/checkout@master
 
-      - name: Get npm package version
-        uses: martinbeentjes/npm-get-version-action@master
-        id: package-version
-        with:
-          path: ./pokemon-static-app
+  #     - name: Get npm package version
+  #       uses: martinbeentjes/npm-get-version-action@master
+  #       id: package-version
+  #       with:
+  #         path: ./pokemon-static-app
 
-      - name: Create .env.production.local file (for static generation)
-        uses: SpicyPizza/create-envfile@v1.3
-        with:
-          envkey_ALLOWED_IMAGE_DOMAINS: raw.githubusercontent.com
-          envkey_POKEAPI_URL: https://pokeapi.co/api/v2
-          envkey_POKEMON_LIMIT: 151
-          envkey_POKEMON_SPRITE_LOGO_RELATIVE_PATH: versions/generation-iv/platinum/132.png
-          envkey_POKEMON_SPRITES_URL: https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon
-          envkey_STAGE: production-docker
-          directory: ./pokemon-static-app
-          file_name: .env.production.local
+  #     - name: Create .env.production.local file (for static generation)
+  #       uses: SpicyPizza/create-envfile@v1.3
+  #       with:
+  #         envkey_ALLOWED_IMAGE_DOMAINS: raw.githubusercontent.com
+  #         envkey_POKEAPI_URL: https://pokeapi.co/api/v2
+  #         envkey_POKEMON_LIMIT: 151
+  #         envkey_POKEMON_SPRITE_LOGO_RELATIVE_PATH: versions/generation-iv/platinum/132.png
+  #         envkey_POKEMON_SPRITES_URL: https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon
+  #         envkey_STAGE: production-docker
+  #         directory: ./pokemon-static-app
+  #         file_name: .env.production.local
 
-      - name: Login to DockerHub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+  #     - name: Login to DockerHub
+  #       uses: docker/login-action@v2
+  #       with:
+  #         username: ${{ secrets.DOCKERHUB_USERNAME }}
+  #         password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Setup production buildx
-        uses: docker/setup-buildx-action@v2
-        id: prodbuilder
+  #     - name: Setup production buildx
+  #       uses: docker/setup-buildx-action@v2
+  #       id: prodbuilder
 
-      - name: Setup development buildx
-        uses: docker/setup-buildx-action@v2
-        if: needs.paths-filter.outputs.dependency-files == 'true'
-        id: devbuilder
+  #     - name: Setup development buildx
+  #       uses: docker/setup-buildx-action@v2
+  #       if: needs.paths-filter.outputs.dependency-files == 'true'
+  #       id: devbuilder
 
-      - name: Build against prodbuilder
-        uses: docker/build-push-action@v3
-        with:
-          context: ./pokemon-static-app
-          push: true
-          builder: ${{ steps.prodbuilder.output.name }}
-          target: prod
-          build-args: |
-            SOURCE_COMMIT=${{ github.sha }}
-            CREATED_DATE=${{ needs.build-vars.outputs.created-date }}
-          tags: |
-            rodarte/nextjs-fr-pokemon-static-app-prod:${{ needs.build-vars.outputs.sha-short }}-${{ needs.build-vars.outputs.branch-name }}
-            rodarte/nextjs-fr-pokemon-static-app-prod:${{ steps.package-version.outputs.current-version }}-${{ needs.build-vars.outputs.branch-name }}
-            rodarte/nextjs-fr-pokemon-static-app-prod:latest-${{ needs.build-vars.outputs.branch-name }}
+  #     - name: Build against prodbuilder
+  #       uses: docker/build-push-action@v3
+  #       with:
+  #         context: ./pokemon-static-app
+  #         push: true
+  #         builder: ${{ steps.prodbuilder.output.name }}
+  #         target: prod
+  #         build-args: |
+  #           SOURCE_COMMIT=${{ github.sha }}
+  #           CREATED_DATE=${{ needs.build-vars.outputs.created-date }}
+  #         tags: |
+  #           rodarte/nextjs-fr-pokemon-static-app-prod:${{ needs.build-vars.outputs.sha-short }}-${{ needs.build-vars.outputs.branch-name }}
+  #           rodarte/nextjs-fr-pokemon-static-app-prod:${{ steps.package-version.outputs.current-version }}-${{ needs.build-vars.outputs.branch-name }}
+  #           rodarte/nextjs-fr-pokemon-static-app-prod:latest-${{ needs.build-vars.outputs.branch-name }}
 
-      - name: Build against devbuilder
-        uses: docker/build-push-action@v3
-        if: needs.paths-filter.outputs.dependency-files == 'true'
-        with:
-          context: ./pokemon-static-app
-          push: true
-          builder: ${{ steps.devbuilder.output.name }}
-          target: dev
-          build-args: |
-            SOURCE_COMMIT=${{ github.sha }}
-            CREATED_DATE=${{ needs.build-vars.outputs.created-date }}
-          tags: |
-            rodarte/nextjs-fr-pokemon-static-app-dev:${{ needs.build-vars.outputs.sha-short }}-${{ needs.build-vars.outputs.branch-name }}
-            rodarte/nextjs-fr-pokemon-static-app-dev:${{ steps.package-version.outputs.current-version }}-${{ needs.build-vars.outputs.branch-name }}
-            rodarte/nextjs-fr-pokemon-static-app-dev:latest-${{ needs.build-vars.outputs.branch-name }}
+  #     - name: Build against devbuilder
+  #       uses: docker/build-push-action@v3
+  #       if: needs.paths-filter.outputs.dependency-files == 'true'
+  #       with:
+  #         context: ./pokemon-static-app
+  #         push: true
+  #         builder: ${{ steps.devbuilder.output.name }}
+  #         target: dev
+  #         build-args: |
+  #           SOURCE_COMMIT=${{ github.sha }}
+  #           CREATED_DATE=${{ needs.build-vars.outputs.created-date }}
+  #         tags: |
+  #           rodarte/nextjs-fr-pokemon-static-app-dev:${{ needs.build-vars.outputs.sha-short }}-${{ needs.build-vars.outputs.branch-name }}
+  #           rodarte/nextjs-fr-pokemon-static-app-dev:${{ steps.package-version.outputs.current-version }}-${{ needs.build-vars.outputs.branch-name }}
+  #           rodarte/nextjs-fr-pokemon-static-app-dev:latest-${{ needs.build-vars.outputs.branch-name }}
