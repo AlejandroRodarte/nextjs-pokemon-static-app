@@ -35,7 +35,7 @@ jobs:
         run: |
           echo "::set-output name=sha_short::$(git log -1 --format="%h")"
           echo "::set-output name=created_date::$(date "+%s")"
-          echo "::set-output name=branch_name::$(git rev-parse --abbrev-ref HEAD | sed 's/[^a-zA-Z0-9]/-/g')"
+          echo "::set-output name=branch_name::$GITHUB_REF_NAME_SLUG"
 
   paths-filter:
     runs-on: ${{ matrix.os }}
