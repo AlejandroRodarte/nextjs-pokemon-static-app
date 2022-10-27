@@ -35,7 +35,12 @@ jobs:
         run: |
           echo "::set-output name=sha_short::$(git log -1 --format="%h")"
           echo "::set-output name=created_date::$(date "+%s")"
-          echo "::set-output name=branch_name::$GITHUB_REF_NAME_SLUG"
+
+      - name: Get branch name slug
+        uses: FranzDiebold/github-env-vars-action@v1.2.0
+        run: |
+          echo "::set-output name=branch_name::$GITHUB_REF_SLUG"
+
 
   paths-filter:
     runs-on: ${{ matrix.os }}
