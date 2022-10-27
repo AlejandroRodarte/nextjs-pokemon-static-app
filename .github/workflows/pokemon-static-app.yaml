@@ -23,7 +23,6 @@ jobs:
     outputs:
       sha-short: ${{ steps.vars.outputs.sha_short }}
       created-date: ${{ steps.vars.outputs.created_date }}
-      branch-name: ${{ steps.vars.outputs.branch_name }}
 
     steps:
       - name: Checkout 🛎
@@ -35,7 +34,6 @@ jobs:
         run: |
           echo "::set-output name=sha_short::$(git log -1 --format="%h")"
           echo "::set-output name=created_date::$(date "+%s")"
-          echo "::set-output name=branch_name::${GITHUB_REF#refs/heads/}"
 
   paths-filter:
     runs-on: ${{ matrix.os }}
@@ -118,9 +116,9 @@ jobs:
             SOURCE_COMMIT=${{ github.sha }}
             CREATED_DATE=${{ needs.build-vars.outputs.created-date }}
           tags: |
-            rodarte/nextjs-fr-pokemon-static-app-prod:${{ needs.build-vars.outputs.sha-short }}-${{ needs.build-vars.outputs.branch-name }}
-            rodarte/nextjs-fr-pokemon-static-app-prod:${{ steps.package-version.outputs.current-version }}-${{ needs.build-vars.outputs.branch-name }}
-            rodarte/nextjs-fr-pokemon-static-app-prod:latest-${{ needs.build-vars.outputs.branch-name }}
+            rodarte/nextjs-fr-pokemon-static-app-prod:${{ needs.build-vars.outputs.sha-short }}-${{ github.ref_name }}
+            rodarte/nextjs-fr-pokemon-static-app-prod:${{ steps.package-version.outputs.current-version }}-${{ github.ref_name }}
+            rodarte/nextjs-fr-pokemon-static-app-prod:latest-${{ github.ref_name }}
 
       - name: Build against devbuilder
         uses: docker/build-push-action@v3
@@ -134,6 +132,6 @@ jobs:
             SOURCE_COMMIT=${{ github.sha }}
             CREATED_DATE=${{ needs.build-vars.outputs.created-date }}
           tags: |
-            rodarte/nextjs-fr-pokemon-static-app-dev:${{ needs.build-vars.outputs.sha-short }}-${{ needs.build-vars.outputs.branch-name }}
-            rodarte/nextjs-fr-pokemon-static-app-dev:${{ steps.package-version.outputs.current-version }}-${{ needs.build-vars.outputs.branch-name }}
-            rodarte/nextjs-fr-pokemon-static-app-dev:latest-${{ needs.build-vars.outputs.branch-name }}
+            rodarte/nextjs-fr-pokemon-static-app-dev:${{ needs.build-vars.outputs.sha-short }}-${{ github.ref_name }}
+            rodarte/nextjs-fr-pokemon-static-app-dev:${{ steps.package-version.outputs.current-version }}-${{ github.ref_name }}
+            rodarte/nextjs-fr-pokemon-static-app-dev:latest-${{ github.ref_name }}
