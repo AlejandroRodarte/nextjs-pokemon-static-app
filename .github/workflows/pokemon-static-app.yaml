@@ -35,7 +35,7 @@ jobs:
         run: |
           echo "sha_short=$(git log -1 --format="%h")" >> $GITHUB_OUTPUT
           echo "created_date=$(date "+%s")" >> $GITHUB_OUTPUT
-          echo "$(git rev-parse --abbrev-ref HEAD | sed 's/[^a-zA-Z0-9]/-/g')"
+          echo "$(git branch --show-current | sed 's/[^a-zA-Z0-9]/-/g')"
 
 
   # paths-filter:
