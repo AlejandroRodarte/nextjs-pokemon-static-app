@@ -29,17 +29,17 @@ jobs:
       - name: Checkout 🛎
         uses: actions/checkout@master
 
-      - name: Get commit hash and date
+      - name: Set useful github env vars
+        uses: FranzDiebold/github-env-vars-action@v1.2.0
+
+      - name: Get commit hash, date, and github ref slug
         id: vars
         shell: bash
         run: |
           echo "::set-output name=sha_short::$(git log -1 --format="%h")"
           echo "::set-output name=created_date::$(date "+%s")"
-
-      - name: Get branch name slug
-        uses: FranzDiebold/github-env-vars-action@v1.2.0
-        run: |
           echo "::set-output name=branch_name::$GITHUB_REF_SLUG"
+
 
 
   paths-filter:
