@@ -29,13 +29,13 @@ jobs:
       - name: Checkout 🛎
         uses: actions/checkout@master
 
-      - name: Get commit hash and date
+      - name: Get commit hash, date and branch slug
         id: vars
         shell: bash
         run: |
-          echo "::set-output name=sha_short::$(git log -1 --format="%h")"
-          echo "::set-output name=created_date::$(date "+%s")"
-          echo "::set-output name=branch_name::${GITHUB_REF#refs/heads/}"
+          echo "sha_short=$(git log -1 --format="%h")" >> $GITHUB_OUTPUT
+          echo "created_date=$(date "+%s")" >> $GITHUB_OUTPUT
+          echo "branch_name=$(echo "${{ github.head_ref }}" | sed 's/[^a-zA-Z0-9]/-/g')" >> $GITHUB_OUTPUT
 
   paths-filter:
     runs-on: ${{ matrix.os }}
